@@ -300,32 +300,32 @@ if (!('encodeInto' in cachedTextEncoder)) {
 
 let WASM_VECTOR_LEN = 0;
 
-function wasm_bindgen__convert__closures_____invoke__h13316f0bf01b3f97(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h13316f0bf01b3f97(arg0, arg1, arg2);
-}
-
 function wasm_bindgen__convert__closures_____invoke__h0acbecb55e6a52dc(arg0, arg1, arg2) {
     wasm.wasm_bindgen__convert__closures_____invoke__h0acbecb55e6a52dc(arg0, arg1, arg2);
 }
 
-function wasm_bindgen__convert__closures_____invoke__h9c12a09faefd1c56(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h9c12a09faefd1c56(arg0, arg1, arg2);
+function wasm_bindgen__convert__closures_____invoke__hbef07e63b3584d1b(arg0, arg1) {
+    wasm.wasm_bindgen__convert__closures_____invoke__hbef07e63b3584d1b(arg0, arg1);
 }
 
 function wasm_bindgen__convert__closures_____invoke__h543a5069d773030d(arg0, arg1) {
     wasm.wasm_bindgen__convert__closures_____invoke__h543a5069d773030d(arg0, arg1);
 }
 
-function wasm_bindgen__convert__closures_____invoke__h99c967234abfc44b(arg0, arg1, arg2) {
-    wasm.wasm_bindgen__convert__closures_____invoke__h99c967234abfc44b(arg0, arg1, isLikeNone(arg2) ? 0 : addToExternrefTable0(arg2));
+function wasm_bindgen__convert__closures_____invoke__h13316f0bf01b3f97(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h13316f0bf01b3f97(arg0, arg1, arg2);
+}
+
+function wasm_bindgen__convert__closures_____invoke__h9c12a09faefd1c56(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h9c12a09faefd1c56(arg0, arg1, arg2);
 }
 
 function wasm_bindgen__convert__closures_____invoke__h366ebbed83023d06(arg0, arg1, arg2, arg3) {
     wasm.wasm_bindgen__convert__closures_____invoke__h366ebbed83023d06(arg0, arg1, arg2, arg3);
 }
 
-function wasm_bindgen__convert__closures_____invoke__hbef07e63b3584d1b(arg0, arg1) {
-    wasm.wasm_bindgen__convert__closures_____invoke__hbef07e63b3584d1b(arg0, arg1);
+function wasm_bindgen__convert__closures_____invoke__h99c967234abfc44b(arg0, arg1, arg2) {
+    wasm.wasm_bindgen__convert__closures_____invoke__h99c967234abfc44b(arg0, arg1, isLikeNone(arg2) ? 0 : addToExternrefTable0(arg2));
 }
 
 const __wbindgen_enum_GamepadMappingType = ["", "standard"];
