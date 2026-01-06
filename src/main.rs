@@ -41,6 +41,7 @@ fn main() {
         )
         .init_state::<GameState>()
         .add_systems(Startup, (setup_loading_camera, setup_game_scene))
+        .add_systems(OnEnter(GameState::InGame), set_global_time_speed)
         .add_systems(Update, hide_loading_screen.run_if(in_state(GameState::Loading)))
         .add_systems(Update, rotate_cube_system.run_if(in_state(GameState::InGame)))
         .run();
@@ -108,6 +109,11 @@ fn rotate_cube_system(
         let mut rotation_factor = 0.0;
         if keyboard_input.pressed(KeyCode::KeyA) { rotation_factor += 1.0; }
         if keyboard_input.pressed(KeyCode::KeyD) { rotation_factor -= 1.0; }
-        transform.rotate_y(rotation_factor * time.delta_secs() * 2.0);
+        transform.rotate_y(rotation_factor * time.delta_secs() * 12.0);
     }
+}
+
+fn set_global_time_speed(mut time: ResMut<Time<Virtual>>) {
+    // Теперь во всей игре время всегда будет идти в 2 раза быстрее
+    time.set_relative_speed(1.0); 
 }
