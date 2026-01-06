@@ -48,12 +48,21 @@
     <canvas id="bevy-canvas"></canvas>
 	
     <script>
-        // Эту функцию вызовет Rust, когда куб будет на экране
-        window.hideBevyLoader = function() {
-            const loader = document.getElementById('loading-screen');
-            if (loader) loader.classList.add('hidden');
-            console.log("Bevy готова, куб отрисован!");
-        };
+		window.hideBevyLoader = function() {
+			const loader = document.getElementById('loading-screen');
+			if (loader && !loader.classList.contains('hidden')) {
+				loader.classList.add('hidden');
+				console.log("Лоадер скрыт!");
+			}
+		};
+
+		// Запасной план для iPhone: если через 10 секунд лоадер висит, 
+		// но в DOM есть canvas — убираем лоадер вручную.
+		setTimeout(() => {
+			if (document.querySelector('canvas')) {
+				window.hideBevyLoader();
+			}
+		}, 10000);
     </script>
 </body>
 </html>
