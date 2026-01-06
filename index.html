@@ -3,9 +3,11 @@
 <head>
     <meta charset="UTF-8">
 	
+	<script src="unpkg.com"></script>
+	
 <script type="module">
-import init, * as bindings from '/bevy_stage/bevy_stage-893a8e2fb9fd0c4e.js';
-const wasm = await init({ module_or_path: '/bevy_stage/bevy_stage-893a8e2fb9fd0c4e_bg.wasm' });
+import init, * as bindings from '/bevy_stage/bevy_stage-5c4946dceea14f2c.js';
+const wasm = await init({ module_or_path: '/bevy_stage/bevy_stage-5c4946dceea14f2c_bg.wasm' });
 
 
 window.wasmBindings = bindings;
@@ -14,7 +16,9 @@ window.wasmBindings = bindings;
 dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
 
 </script>
+	
     <title>Bevy Stage </title>
+	
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #111; }
         
@@ -45,7 +49,7 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
         /* Класс для скрытия */
         .hidden { opacity: 0; pointer-events: none; }
     </style>
-<link rel="modulepreload" href="/bevy_stage/bevy_stage-893a8e2fb9fd0c4e.js" crossorigin="anonymous" integrity="sha384-/c7MQ981h+0aJqJJl5jF150PwqXrp5MHaOIe4KF5DpHvuX6UTh02oy8VUoBwNzIB"><link rel="preload" href="/bevy_stage/bevy_stage-893a8e2fb9fd0c4e_bg.wasm" crossorigin="anonymous" integrity="sha384-rYG/ob892NtYC2c1Q+llW+xOONDw12OovtkUdQcfJEM+bDTXSAUbVnUWVaFBd/uI" as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="/bevy_stage/bevy_stage-5c4946dceea14f2c.js" crossorigin="anonymous" integrity="sha384-xoktBvWBzWr5gkzMs0KCiTfkcT391KytvOkM/Crtrn1LpTpB+jKzacsuHvXGYDT0"><link rel="preload" href="/bevy_stage/bevy_stage-5c4946dceea14f2c_bg.wasm" crossorigin="anonymous" integrity="sha384-AMQNbToeC5PVQu1gisycCOtz7x3c4hp6jsNuFFH88wcGQG3yXCxOC2EixVmJgM43" as="fetch" type="application/wasm"></head>
 <body>
     <div id="loading-screen">
         <div class="spinner"></div>
@@ -53,14 +57,23 @@ dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
     </div>
 
     <canvas id="bevy-canvas"></canvas>
-
+	
     <script>
-        // Эту функцию вызовет Rust, когда куб будет на экране
-        window.hideBevyLoader = function() {
-            const loader = document.getElementById('loading-screen');
-            if (loader) loader.classList.add('hidden');
-            console.log("Bevy готова, куб отрисован!");
-        };
+		window.hideBevyLoader = function() {
+			const loader = document.getElementById('loading-screen');
+			if (loader && !loader.classList.contains('hidden')) {
+				loader.classList.add('hidden');
+				console.log("Лоадер скрыт!");
+			}
+		};
+
+		// Запасной план для iPhone: если через 10 секунд лоадер висит, 
+		// но в DOM есть canvas — убираем лоадер вручную.
+		setTimeout(() => {
+			if (document.querySelector('canvas')) {
+				window.hideBevyLoader();
+			}
+		}, 10000);
     </script>
 </body>
 </html>
