@@ -2,7 +2,7 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
-    <title>My Bevy Game 2</title>
+    <title>Bevy Stage </title>
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #111; }
         
@@ -33,7 +33,7 @@
         /* Класс для скрытия */
         .hidden { opacity: 0; pointer-events: none; }
     </style>
-<link rel="modulepreload" href="/bevy_stage/my_bevy_game-dc603c1fe11a4411.js" crossorigin="anonymous" integrity="sha384-n+jtvhSLAh9KYQR/Ezqy4diiSsd2YUbNpGoL1Xe32NqySCHPGmum90HUQTS+PcvE"><link rel="preload" href="/bevy_stage/my_bevy_game-dc603c1fe11a4411_bg.wasm" crossorigin="anonymous" integrity="sha384-T8bcblICElM/wD0ZJK2nz7Cyzg4b9bXNXu5dVVD+SyXIUvkbjZA4ACVdW9c5mqDc" as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4.js" crossorigin="anonymous" integrity="sha384-U7mJ/zWEFosOIJQKZO7PtXFw/IxVE7N3ihhvPZfBi7zfO4jfM72aH6iVB8QYGxq5"><link rel="preload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm" crossorigin="anonymous" integrity="sha384-ahwiGz2abST0nPWmS2CTFNoavjdbGyzHCcJ1aFGAFHMQq6rN10WQLckX0/xehPbW" as="fetch" type="application/wasm"></head>
 <body>
     <div id="loading-screen">
         <div class="spinner"></div>
@@ -52,8 +52,8 @@
     </script>
 
 <script type="module">
-import init, * as bindings from '/bevy_stage/my_bevy_game-dc603c1fe11a4411.js';
-const wasm = await init({ module_or_path: '/bevy_stage/my_bevy_game-dc603c1fe11a4411_bg.wasm' });
+import init, * as bindings from '/bevy_stage/bevy_stage-c47d7ed48d2762c4.js';
+const wasm = await init({ module_or_path: '/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm' });
 
 
 window.wasmBindings = bindings;
