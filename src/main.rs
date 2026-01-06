@@ -21,17 +21,13 @@ fn main() {
         .insert_resource(ClearColor(Color::BLACK))
         .add_plugins(
             DefaultPlugins
-                // 1. Настраиваем рендеринг на использование WebGL2 (GL)
                 .set(RenderPlugin {
                     render_creation: RenderCreation::Automatic(WgpuSettings {
-                        // Принудительно включаем поддержку только WebGL2 (Backends::GL)
-                        // Это гарантирует работу на iPhone XR без включения спец. флагов
                         backends: Some(Backends::GL),
                         ..default()
                     }),
                     ..default()
                 })
-                // 2. Настраиваем окно
                 .set(WindowPlugin {
                     primary_window: Some(Window {
                         canvas: Some("#bevy-canvas".into()),
@@ -39,7 +35,9 @@ fn main() {
                         ..default()
                     }),
                     ..default()
-                }),
+                })
+                // ВЫЗЫВАЕМ ЗДЕСЬ (внутри add_plugins)
+                .disable::<bevy::audio::AudioPlugin>(), 
         )
         .init_state::<GameState>()
         .add_systems(Startup, (setup_loading_camera, setup_game_scene))
