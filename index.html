@@ -2,6 +2,18 @@
 <html lang="ru">
 <head>
     <meta charset="UTF-8">
+	
+<script type="module">
+import init, * as bindings from '/bevy_stage/bevy_stage-c47d7ed48d2762c4.js';
+const wasm = await init({ module_or_path: '/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm' });
+
+
+window.wasmBindings = bindings;
+
+
+dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
+
+</script>
     <title>Bevy Stage </title>
     <style>
         body, html { margin: 0; padding: 0; width: 100%; height: 100%; overflow: hidden; background: #111; }
@@ -33,7 +45,7 @@
         /* Класс для скрытия */
         .hidden { opacity: 0; pointer-events: none; }
     </style>
-<link rel="modulepreload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4.js" crossorigin="anonymous" integrity="sha384-U7mJ/zWEFosOIJQKZO7PtXFw/IxVE7N3ihhvPZfBi7zfO4jfM72aH6iVB8QYGxq5"><link rel="preload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm" crossorigin="anonymous" integrity="sha384-ahwiGz2abST0nPWmS2CTFNoavjdbGyzHCcJ1aFGAFHMQq6rN10WQLckX0/xehPbW" as="fetch" type="application/wasm"></head>
+<link rel="modulepreload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4.js" crossorigin="anonymous" integrity="sha384-W/g5CH4pj5Km+fWzp2X87LJ4Z+HPWZX4SrloP7WqbHGZBIha7W+C/TZgGrfPUEC1"><link rel="preload" href="/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm" crossorigin="anonymous" integrity="sha384-kAk+SDzslRNOgGNKYrp58gStKQjiLhvIMzFhCWttmMOTUFqza0y8AOlmwSzpvSci" as="fetch" type="application/wasm"></head>
 <body>
     <div id="loading-screen">
         <div class="spinner"></div>
@@ -50,17 +62,6 @@
             console.log("Bevy готова, куб отрисован!");
         };
     </script>
-
-<script type="module">
-import init, * as bindings from '/bevy_stage/bevy_stage-c47d7ed48d2762c4.js';
-const wasm = await init({ module_or_path: '/bevy_stage/bevy_stage-c47d7ed48d2762c4_bg.wasm' });
-
-
-window.wasmBindings = bindings;
-
-
-dispatchEvent(new CustomEvent("TrunkApplicationStarted", {detail: {wasm}}));
-
-</script></body>
+</body>
 </html>
 
