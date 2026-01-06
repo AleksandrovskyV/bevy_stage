@@ -20,7 +20,7 @@ jobs:
 
       - name: Build Project
         # ВАЖНО: замените /my-bevy-game/ на имя вашего репозитория
-        run: trunk build --release --public-url /bevy_stage/
+        run: trunk build index.html --release --public-url /bevy_stage/
 
       - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4
