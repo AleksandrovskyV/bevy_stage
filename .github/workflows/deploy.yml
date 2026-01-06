@@ -1,0 +1,29 @@
+name: Deploy to GitHub Pages
+on:
+  push:
+    branches: [main] # Или master, если у вас так называется ветка
+jobs:
+  build-deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install Rust
+        uses: dtolnay/rust-toolchain@stable
+        with:
+          targets: wasm32-unknown-unknown
+
+      - name: Install Trunk
+        run: cargo install trunk
+
+      - name: Build Project
+        # ВАЖНО: замените /my-bevy-game/ на имя вашего репозитория
+        run: trunk build --release --public-url /bevy_stage/
+
+      - name: Deploy
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          folder: dist
+          branch: gh-pages # GitHub создаст эту ветку сам для хостинга
