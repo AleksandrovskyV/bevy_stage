@@ -1,6 +1,8 @@
 use bevy::prelude::*;
+// Добавляем импорты для настройки графического бэкенда
+use bevy::render::settings::{Backends, RenderCreation, WgpuSettings};
+use bevy::render::RenderPlugin;
 
-// ОБЯЗАТЕЛЬНО: Добавляем этот импорт для связи с JS
 #[cfg(target_arch = "wasm32")]
 use wasm_bindgen::prelude::*;
 
@@ -17,30 +19,41 @@ struct MyCube;
 fn main() {
     App::new()
         .insert_resource(ClearColor(Color::BLACK))
-        .add_plugins(DefaultPlugins.set(WindowPlugin {
-            primary_window: Some(Window {
-                canvas: Some("#bevy-canvas".into()),
-                fit_canvas_to_parent: true,
-                ..default()
-            }),
-            ..default()
-        }))
+        .add_plugins(
+            DefaultPlugins
+                // 1. Настраиваем рендеринг на использование WebGL2 (GL)
+                .set(RenderPlugin {
+                    render_creation: RenderCreation::Automatic(WgpuSettings {
+                        // Принудительно включаем поддержку только WebGL2 (Backends::GL)
+                        // Это гарантирует работу на iPhone XR без включения спец. флагов
+                        backends: Some(Backends::GL),
+                        ..default()
+                    }),
+                    ..default()
+                })
+                // 2. Настраиваем окно
+                .set(WindowPlugin {
+                    primary_window: Some(Window {
+                        canvas: Some("#bevy-canvas".into()),
+                        fit_canvas_to_parent: true,
+                        ..default()
+                    }),
+                    ..default()
+                }),
+        )
         .init_state::<GameState>()
-        
         .add_systems(Startup, (setup_loading_camera, setup_game_scene))
-        
-        // Эта система скроет загрузчик, как только куб появится в памяти
         .add_systems(Update, hide_loading_screen.run_if(in_state(GameState::Loading)))
-        
         .add_systems(Update, rotate_cube_system.run_if(in_state(GameState::InGame)))
         .run();
 }
+
+// --- Остальная часть кода остается без изменений ---
 
 fn hide_loading_screen(
     mut next_state: ResMut<NextState<GameState>>,
     query: Query<Entity, With<MyCube>>, 
 ) {
-    // Если куб создан в мире
     if !query.is_empty() {
         #[cfg(target_arch = "wasm32")]
         {
@@ -57,7 +70,6 @@ fn setup_loading_camera(mut commands: Commands) {
     ));
 }
 
-// Связь с JavaScript
 #[cfg(target_arch = "wasm32")]
 #[wasm_bindgen]
 extern "C" {
